@@ -19,26 +19,26 @@
               android:orientation="horizontal"
               android:padding="12dp" >
 
-              <TextView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                     android:id="@+id/player_position"
-                     android:text="00:00"
-                     android:textStyle="bold"
-                     android:textColor="@android:color/white" />
+           <TextView
+               android:id="@+id/player_position"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="00:00"
+               android:textColor="@color/purple_500"
+               android:textStyle="bold" />
               <SeekBar
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
                   android:id="@+id/seek_bar" />
 
-              <TextView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/player_duration"
-                  android:text="00:00"
-                  android:textStyle="bold"
-                  android:textColor="@android:color/white" />
+           <TextView
+               android:id="@+id/player_duration"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="00:00"
+               android:textColor="@color/purple_500"
+               android:textStyle="bold" />
 
 
 

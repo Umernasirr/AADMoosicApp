@@ -32,13 +32,14 @@ public class LoginActivity extends AppCompatActivity {
         View.OnClickListener onClickListenerLogin = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), SongsListActivity.class);
+                startActivity(intent);
             }
         };
 
 
         btnRegister.setOnClickListener(onClickListenerRegister);
-
+        btnLogin.setOnClickListener(onClickListenerLogin);
 
     }
 
