@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoosicApp">
 
+            <user-permission android:name="android.permission.INTERNET" />
+
+
         <activity android:name=".RegisterActivity"/>
         <activity
             android:name=".LoginActivity"

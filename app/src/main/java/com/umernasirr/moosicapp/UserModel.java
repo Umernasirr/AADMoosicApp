@@ -2,15 +2,15 @@ package com.umernasirr.moosicapp;
 
 public class UserModel {
 
-    public UserModel(int id, String username, String password, String gender, String email) {
-        this.id = id;
+    public UserModel( String username, String password, String gender, String email) {
+
         this.username = username;
         this.password = password;
         this.gender = gender;
         this.email = email;
     }
 
-    private int id;
+    private Integer id;
     private String username;
     private String password;
     private String gender;
