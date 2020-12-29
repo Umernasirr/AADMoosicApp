@@ -74,10 +74,10 @@ public class CreateSongActivity extends AppCompatActivity {
                 .enableImageCapture(true)
                 .setSingleChoiceMode(true)
                 .setSkipZeroSizeFiles(true)
-                .setShowImages(true)
+                .setShowImages(false)
                 .setShowVideos(false)
-                .setShowAudios(false)
-                .setSuffixes("jpg")
+                .setShowAudios(true)
+                .setSuffixes(".mp3")
                 .build());
         startActivityForResult(intent, FILE_SELECT_CODE);
     }
@@ -127,12 +127,8 @@ public class CreateSongActivity extends AppCompatActivity {
                 for(MediaFile file: files){
                     Log.d("myTag", file.getName());
                     Log.d("myTag", file.getPath()+ "");
-//
 
-
-//                    if(file.getMediaType() == MediaFile.TYPE_VIDEO ){
-//                        filteredFiles.add(file);
-//                    }
+//                    txtSelectedFile.setText("" + file.getName());
                 }
                 break;
         }
