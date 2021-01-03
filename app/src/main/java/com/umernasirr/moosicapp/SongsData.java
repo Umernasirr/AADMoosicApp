@@ -15,11 +15,9 @@ public class SongsData {
         SongModel testSong2 = new SongModel(2, "Yesterday - Beetles ", "www.test2.com", 2, "Talal");
         SongModel testSong3 = new SongModel(3, "Wonderwall - Oasis ", "www.test3.com", 3,"Asbah");
 
-
         songsList.add(testSong1);
         songsList.add(testSong2);
         songsList.add(testSong3);
-
     }
 
     public static SongsData getInstance() {

@@ -12,6 +12,9 @@ public class SongModel {
         this.url = url;
         this.user_id = user_id;
         this.user_name = user_name;
+
+
+
     }
 
     public int getId() {
