@@ -10,8 +10,12 @@ public class UserModel {
         this.email = email;
         this.playlist = playlist;
     }
+    public  UserModel(String email, String password){
+        this.email = email;
+        this.password = password;
+    }
 
-    private int id;
+    private Integer id;
     private String username;
     private String password;
     private String gender;

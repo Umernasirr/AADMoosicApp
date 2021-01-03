@@ -1,22 +1,44 @@
 package com.umernasirr.moosicapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
 
         Button btnRegister = (Button) findViewById(R.id.btnRegister);
         Button btnLogin = (Button) findViewById(R.id.btnLogin);
+        EditText email = (EditText) findViewById(R.id.edtTxtUser);
+        EditText password = (EditText) findViewById(R.id.edtTxtPass);
+        Retrofit retrofit = RetrofitFactory.getRetrofit();
+
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+
+
 
 // This is our registration clicker
         View.OnClickListener onClickListenerRegister = new View.OnClickListener() {
@@ -32,8 +54,40 @@ public class LoginActivity extends AppCompatActivity {
         View.OnClickListener onClickListenerLogin = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SongsListActivity.class);
-                startActivity(intent);
+                UserModel userModel = new UserModel(email.getText().toString(),password.getText().toString());
+                Call<LoginResponse> call = apiInterface.login(userModel);
+
+
+                call.enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        LoginResponse result = response.body();
+
+
+                        if(String.valueOf(response.code()).equals("200")) {
+
+                            editor.putString("token", result.getToken());
+                            Gson gson = new Gson();
+                            String json =  gson.toJson(result.getUser());
+                            editor.putString("user", json);
+                            editor.commit();
+                            startActivity(new Intent(getApplicationContext(), SongsListActivity.class));
+
+
+                        }
+
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+//                        AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
+//                        builder1.setMessage("Write your message hedadassdasre.");
+                        Log.d("Login", "dasdasdasdasdadsdss");
+                        t.printStackTrace();
+                    }
+                });
             }
         };
 
@@ -42,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(onClickListenerLogin);
 
     }
+
 
 
 }
