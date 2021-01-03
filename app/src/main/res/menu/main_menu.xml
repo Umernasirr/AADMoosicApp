@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:title="Application">
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/mitemListings"
+                android:icon="@drawable/ic_audio"
+                android:title="Search and Play Songs" />
+            <item
+                android:id="@+id/mitemUpload"
+                android:icon="@drawable/ic_baseline_add_circle_outline_24"
+                android:title="Upload Song" />
+
+            <item
+                android:id="@+id/mitemPlaylist"
+                android:icon="@drawable/ic_baseline_playlist_add_check_24"
+                android:title="View Your Playlist" />
+        </menu>
+    </item>
+
+    <item android:title="Settings">
+
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/mitemProfile"
+                android:icon="@drawable/ic_outline_person_24"
+                android:title="My Profile" />
+
+            <item
+                android:id="@+id/mitemLogout"
+                android:icon="@drawable/ic_baseline_login_24"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

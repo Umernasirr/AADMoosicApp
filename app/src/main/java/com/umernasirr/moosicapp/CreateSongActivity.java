@@ -14,6 +14,9 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,7 +37,9 @@ public class CreateSongActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int REQUEST_GALLERY = 200;
     private static final int FILE_SELECT_CODE = 69;
-
+    TextView txtSelectedFile;
+    ImageView imgSelectedFile;
+    EditText edtTxtSongName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +49,9 @@ public class CreateSongActivity extends AppCompatActivity {
         Button btnSelectFile = (Button) findViewById(R.id.btnSelectFile);
         Button btnUploadFile = (Button) findViewById(R.id.btnUploadFile);
 
+        txtSelectedFile = findViewById(R.id.txtSelectedFile);
+        imgSelectedFile = findViewById(R.id.imgSelectedFile);
+        edtTxtSongName = findViewById(R.id.edtTxtSongName);
 
         View.OnClickListener onClickListenerSelect = new View.OnClickListener() {
             @Override
@@ -61,9 +69,7 @@ public class CreateSongActivity extends AppCompatActivity {
         };
 
         btnSelectFile.setOnClickListener(onClickListenerSelect);
-
     }
-
 
     public void filePicker() {
         Toast.makeText(this, "File Picker Call", Toast.LENGTH_SHORT).show();
@@ -110,27 +116,26 @@ public class CreateSongActivity extends AppCompatActivity {
                     Toast.makeText(CreateSongActivity.this, "Permission Successful", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(CreateSongActivity.this, "Permission Failed", Toast.LENGTH_SHORT).show();
-
                 }
-
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case FILE_SELECT_CODE:
-                ArrayList<MediaFile> files = data.getParcelableArrayListExtra(FilePickerActivity.MEDIA_FILES);
-                ArrayList<MediaFile> filteredFiles = new ArrayList<>();
-                //Do something with files
-                for(MediaFile file: files){
-                    Log.d("myTag", file.getName());
-                    Log.d("myTag", file.getPath()+ "");
+        if (requestCode == FILE_SELECT_CODE) {
+            ArrayList<MediaFile> files = data.getParcelableArrayListExtra(FilePickerActivity.MEDIA_FILES);
+            //Do something with files
+            MediaFile selectedFile = files.get(0);
+            Log.d("myTag", selectedFile.getName());
+            Log.d("myTag", selectedFile.getPath() + "");
+            txtSelectedFile.setText(selectedFile.getName());
+            imgSelectedFile.setImageURI(selectedFile.getThumbnail());
+            edtTxtSongName.setText(selectedFile.getName());
+            Log.d("myTag","" + selectedFile.getId());
 
-//                    txtSelectedFile.setText("" + file.getName());
-                }
-                break;
+            // To upload the file
+
         }
     }
 
