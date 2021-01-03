@@ -1,36 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity"
+    android:id="@+id/drawerLayoutSettings">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Profile Settings"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:text="Hey John"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/white">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/settingsToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:text="Hey John"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-
-
         android:id="@+id/textField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -136,12 +144,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:contentDescription="Password"
-
         app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
         app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_vpn_key_24" />
+        app:srcCompat="@drawable/ic_baseline_vpn_key_24"
+        />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -152,7 +160,8 @@
         app:layout_constraintEnd_toStartOf="@+id/textInputLayout2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_alternate_email_24" />
+        app:srcCompat="@drawable/ic_baseline_alternate_email_24"
+        android:contentDescription="EmailPicture" />
 
 
     <ImageView
@@ -164,11 +173,12 @@
         app:layout_constraintEnd_toStartOf="@+id/textInputLayout3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_wc_24" />
-
+        app:srcCompat="@drawable/ic_baseline_wc_24"
+        android:contentDescription="Gender"
+        />
 
     <Button
-        android:id="@+id/btnBack"
+        android:id="@+id/btnGoBack"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -193,5 +203,18 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:layout_constraintVertical_bias="0.75" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/login_menu"
+        android:id="@+id/navViewSettings"
+        android:layout_gravity="start"
+        />
+
+</androidx.drawerlayout.widget.DrawerLayout>
