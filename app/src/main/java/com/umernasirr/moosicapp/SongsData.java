@@ -6,9 +6,9 @@ import java.util.ArrayList;
 public class SongsData {
 
     public ArrayList<SongModel> songsList;
-    public static SongsData songsData;
 
-    private SongsData() {
+
+    public SongsData() {
         songsList = new ArrayList<>();
 
         SongModel testSong1 = new SongModel(1, "I want it that way- Backstreet Boys", "www.test1.com", 1, "Umer");
@@ -20,12 +20,6 @@ public class SongsData {
         songsList.add(testSong3);
     }
 
-    public static SongsData getInstance() {
-        if (songsData == null) {
-            songsData = new SongsData();
-        }
-        return songsData;
-    }
 
 
 }

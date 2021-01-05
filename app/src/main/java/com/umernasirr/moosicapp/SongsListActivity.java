@@ -35,7 +35,8 @@ import retrofit2.Retrofit;
 public class SongsListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ArrayList<SongModel> songsList;
     SongListAdapter songListAdapter;
-
+    RecyclerView rvSongsList;
+    SongsData songsData ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,18 +58,6 @@ public class SongsListActivity extends AppCompatActivity implements NavigationVi
 
         navViewListings.setNavigationItemSelectedListener(this);
 
-        SongsData songsData = SongsData.getInstance();
-
-        RecyclerView rvSongsList = findViewById(R.id.rvSongList);
-
-         songsList = songsData.songsList;
-         songListAdapter = new SongListAdapter(this, songsData.songsList);
-
-
-//        rvSongsList.setAdapter(songListAdapter);
-        rvSongsList.setLayoutManager(new LinearLayoutManager(this));
-
-
         SearchView searchViewSongs = findViewById(R.id.searchViewSongs);
         Call<SongsResponse> call = apiInterface.getSongs();
 
@@ -77,19 +66,25 @@ public class SongsListActivity extends AppCompatActivity implements NavigationVi
             @Override
             public void onResponse(Call<SongsResponse> call, Response<SongsResponse> response) {
 
+
+                songsData = new SongsData();
+
+                rvSongsList = findViewById(R.id.rvSongList);
+
+
                 SongsResponse result = response.body();
-//                Gson gson = new Gson();
-//                String json = gson.toJson(result.getData().get(0).toString());
                 Log.d("Login", result.getData().get(0).getUser());
 
-        for(int i = 0 ; i<= result.getData().size(); i++){
+        for(int i = 0 ; i< result.getData().size(); i++){
             SongModel songModel = new SongModel(1,result.getData().get(i).getDescription(), result.getData().get(i).getUrl(), 1,"talal" );
-            Log.d("Login", songModel.toString());
-//            songsData.songsList.add(songModel);
-        }
-//                Log.d("Login", songsData.songsList.toString());
-//                SongListAdapter songListAdapter = new SongListAdapter(SongsListActivity.this, songsData.songsList);
 
+            songsData.songsList.add(songModel);
+        }
+                Log.d("Login", songsData.songsList.toString());
+                SongListAdapter songListAdapter = new SongListAdapter(SongsListActivity.this, songsData.songsList);
+
+                rvSongsList.setAdapter(songListAdapter);
+                rvSongsList.setLayoutManager(new LinearLayoutManager(SongsListActivity.this));
 
             }
 
