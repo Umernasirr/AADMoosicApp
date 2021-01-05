@@ -7,6 +7,7 @@
     android:id="@+id/drawerLayoutRegister">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/txt"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -47,7 +48,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="60dp"
                 android:layout_marginRight="60dp"
-                android:hint="Username"
+                android:hint="Name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2">
@@ -176,6 +177,66 @@
                 app:layout_constraintTop_toBottomOf="@+id/radioGroupGender"
                 app:layout_constraintVertical_bias="0.68" />
 
+            <TextView
+                android:id="@+id/txtNameError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#CD2424"
+                app:layout_constraintBottom_toTopOf="@+id/txtFieldPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.169"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtFieldUsername"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/txtPasswordError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#CD2424"
+                app:layout_constraintBottom_toTopOf="@+id/txtFieldEmail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.169"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtFieldPassword"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/txtEmailError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#CD2424"
+                app:layout_constraintBottom_toTopOf="@+id/radioGroupGender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.169"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtFieldEmail"
+                app:layout_constraintVertical_bias="0.068" />
+
+            <TextView
+                android:id="@+id/txtErrorSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#CD2424"
+                app:layout_constraintBottom_toTopOf="@+id/btnAlready"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroupGender"
+                app:layout_constraintVertical_bias="0.835" />
+
+            <TextView
+                android:id="@+id/txtGenderError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#CD2424"
+                app:layout_constraintBottom_toTopOf="@+id/btnAlready"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.169"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroupGender"
+                app:layout_constraintVertical_bias="0.0" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -188,6 +249,12 @@
         android:id="@+id/navViewRegister"
         android:layout_gravity="start"
         />
-
+        <ProgressBar
+            android:id="@+id/loaderSignup"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:rotationX="-7" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

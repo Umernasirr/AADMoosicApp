@@ -4,13 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class LoginResponse
+public class AuthResponse
 {
     private String success;
 
     private User user;
 
     private String token;
+    private String error;
 
     public String getSuccess ()
     {
@@ -25,6 +26,13 @@ public class LoginResponse
     public User getUser ()
     {
         return user;
+    }
+
+    public String getError(){
+        return error;
+    }
+    public void setError(String error){
+        this.error = error;
     }
 
     public void setUser (User user)
