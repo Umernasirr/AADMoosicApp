@@ -38,14 +38,11 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
         navViewSettings.setNavigationItemSelectedListener(this);
 
-
-
         // Implementation
         EditText editTextUsername = findViewById(R.id.editTextUsername);
         EditText editTextPassword = findViewById(R.id.editTextPassword);
         EditText editTxtEmail = findViewById(R.id.editTxtEmail);
         EditText editTxtGender = findViewById(R.id.editTxtGender);
-
 
     }
 

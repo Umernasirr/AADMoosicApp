@@ -2,6 +2,7 @@ package com.umernasirr.moosicapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,11 +41,19 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.myView
         holder.txtSongName.setText(songsList.get(position).getName());
         holder.txtSongCreator.setText(songsList.get(position).getUser_name());
 
-// Action listener on button to go to play screen
+        // Action listener on button to go to play screen
         holder.btnPlaySong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MusicPlayerActivity.class);
+
+                Bundle bundle = new Bundle();
+                //Add your data from method to bundle
+                bundle.putString("song_url", songsList.get(position).getUrl());
+                bundle.putString("song_name", songsList.get(position).getName());
+
+                //Add the bundle to the intent
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });
@@ -93,7 +102,6 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.myView
         TextView txtSongName;
         TextView txtSongCreator;
         ImageView btnPlaySong;
-
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);

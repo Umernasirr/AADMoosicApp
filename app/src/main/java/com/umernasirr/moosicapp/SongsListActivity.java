@@ -65,12 +65,8 @@ public class SongsListActivity extends AppCompatActivity implements NavigationVi
         call.enqueue(new Callback<SongsResponse>() {
             @Override
             public void onResponse(Call<SongsResponse> call, Response<SongsResponse> response) {
-
-
                 songsData = new SongsData();
-
                 rvSongsList = findViewById(R.id.rvSongList);
-
 
                 SongsResponse result = response.body();
                 Log.d("Login", result.getData().get(0).getUser());
