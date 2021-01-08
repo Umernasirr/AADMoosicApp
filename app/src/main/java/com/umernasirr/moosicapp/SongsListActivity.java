@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,10 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -36,11 +31,20 @@ public class SongsListActivity extends AppCompatActivity implements NavigationVi
     ArrayList<SongModel> songsList;
     SongListAdapter songListAdapter;
     RecyclerView rvSongsList;
-    SongsData songsData ;
+    SongsData songsData;
+    String playlist_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_list);
+
+        Intent intent = getIntent();
+
+        playlist_id = (String) intent.getStringExtra("playlistid");
+
+
+
 
         Toolbar toolbar = findViewById(R.id.songListToolbar);
         setSupportActionBar(toolbar);
@@ -59,66 +63,113 @@ public class SongsListActivity extends AppCompatActivity implements NavigationVi
         navViewListings.setNavigationItemSelectedListener(this);
 
         SearchView searchViewSongs = findViewById(R.id.searchViewSongs);
-        Call<SongsResponse> call = apiInterface.getSongs();
+
+        if (playlist_id != null) {
+            Log.d("testing","https://moosikk.herokuapp.com/api/v1/playlist/" + playlist_id);
+
+            Call<PlaylistResponseById> call;
+
+            call = apiInterface.getPlaylistbyId("https://moosikk.herokuapp.com/api/v1/playlist/" + playlist_id);
+
+            call.enqueue(new Callback<PlaylistResponseById>() {
+                @Override
+                public void onResponse(Call<PlaylistResponseById> call, Response<PlaylistResponseById> response) {
+
+                    songsData = new SongsData();
+                    rvSongsList = findViewById(R.id.rvSongList);
+
+                    PlaylistResponseById result = response.body();
+
+                    Gson gson = new Gson();
+
+                    String json = gson.toJson(response.body().getData());
 
 
-        call.enqueue(new Callback<SongsResponse>() {
-            @Override
-            public void onResponse(Call<SongsResponse> call, Response<SongsResponse> response) {
+                    if (result.getData() != null) {
+
+                        ArrayList<SongModel> newSongModel = response.body().getData().get(0).getSong();
+
+                        songListAdapter = new SongListAdapter(SongsListActivity.this, newSongModel);
+
+                        rvSongsList.setAdapter(songListAdapter);
+                        rvSongsList.setLayoutManager(new LinearLayoutManager(SongsListActivity.this));
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<PlaylistResponseById> call, Throwable t) {
+                    Log.d("testing", "Error");
+
+                    Gson gson = new Gson();
 
 
-                songsData = new SongsData();
+                    Log.d("testing", t.getMessage());
 
-                rvSongsList = findViewById(R.id.rvSongList);
+                }
+
+            });
+
+        } else {
+            Call<SongsResponse> call;
+            call = apiInterface.getSongs();
+
+            call.enqueue(new Callback<SongsResponse>() {
+                @Override
+                public void onResponse(Call<SongsResponse> call, Response<SongsResponse> response) {
+                    songsData = new SongsData();
+                    rvSongsList = findViewById(R.id.rvSongList);
 
 
-                SongsResponse result = response.body();
-                Log.d("Login", result.getData().get(0).getUser());
+                    SongsResponse result = response.body();
+                    if (result.getData() != null) {
 
-        for(int i = 0 ; i< result.getData().size(); i++){
-            SongModel songModel = new SongModel(1,result.getData().get(i).getDescription(), result.getData().get(i).getUrl(), 1,"talal" );
+                        for (int i = 0; i < result.getData().size(); i++) {
+                            SongModel songModel = new SongModel(result.getData().get(i).get_id(), result.getData().get(i).getDescription(), result.getData().get(i).getUser() , result.getData().get(i).getUrl(), result.getData().get(i).getCreatedAt()  ,  result.getData().get(i).get__v()   );
+                            songsData.songsList.add(songModel);
+                        }
 
-            songsData.songsList.add(songModel);
+
+                        songListAdapter = new SongListAdapter(SongsListActivity.this, songsData.songsList);
+
+                        rvSongsList.setAdapter(songListAdapter);
+                        rvSongsList.setLayoutManager(new LinearLayoutManager(SongsListActivity.this));
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SongsResponse> call, Throwable t) {
+                    Log.d("myTag", "Error");
+                }
+            });
+
+            searchViewSongs.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    if (songListAdapter != null) {
+                        songListAdapter.getFilter().filter(newText);
+                    }
+                    return false;
+
+                }
+            });
+
+            Button btnCreateSong = findViewById(R.id.btnCreateSong);
+
+            btnCreateSong.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), CreateSongActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
-                Log.d("Login", songsData.songsList.toString());
-                SongListAdapter songListAdapter = new SongListAdapter(SongsListActivity.this, songsData.songsList);
-
-                rvSongsList.setAdapter(songListAdapter);
-                rvSongsList.setLayoutManager(new LinearLayoutManager(SongsListActivity.this));
-
-            }
-
-            @Override
-            public void onFailure(Call<SongsResponse> call, Throwable t) {
-
-            }
-        });
-
-        searchViewSongs.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                songListAdapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-
-        Button btnCreateSong = findViewById(R.id.btnCreateSong);
-
-        btnCreateSong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CreateSongActivity.class);
-                startActivity(intent);
-            }
-        });
     }
-
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected (@NonNull MenuItem item){
         Intent intent;
         switch (item.getItemId()) {
             case R.id.mitemProfile:
@@ -141,12 +192,16 @@ public class SongsListActivity extends AppCompatActivity implements NavigationVi
                 startActivity(intent);
                 break;
 
+            case R.id.mitemPosts:
+                intent = new Intent(this, PostListActivity.class);
+                startActivity(intent);
+                break;
         }
         return true;
     }
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
+    public void onPointerCaptureChanged ( boolean hasCapture){
 
     }
 }

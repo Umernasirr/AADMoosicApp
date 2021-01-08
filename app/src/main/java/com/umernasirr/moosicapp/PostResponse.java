@@ -1,25 +1,11 @@
 package com.umernasirr.moosicapp;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class SongsResponse
+public class PostResponse
 {
     private boolean success;
 
-    private List<Data> data;
+    private ArrayList<DataPost> data;
 
     public void setSuccess(boolean success){
         this.success = success;
@@ -27,22 +13,23 @@ public class SongsResponse
     public boolean getSuccess(){
         return this.success;
     }
-    public void setData(List<Data> data){
+    public void setData(ArrayList<DataPost> data){
         this.data = data;
     }
-    public List<Data> getData(){
+    public ArrayList<DataPost> getData(){
         return this.data;
     }
 }
 
-
-class Data
+class DataPost
 {
     private String _id;
 
+    private String title;
+
     private String description;
 
-    private User user;
+    private String user;
 
     private String url;
 
@@ -56,16 +43,22 @@ class Data
     public String get_id(){
         return this._id;
     }
+    public void setTitle(String title){
+        this.title = title;
+    }
+    public String getTitle(){
+        return this.title;
+    }
     public void setDescription(String description){
         this.description = description;
     }
     public String getDescription(){
         return this.description;
     }
-    public void setUser(User user){
+    public void setUser(String user){
         this.user = user;
     }
-    public User getUser(){
+    public String getUser(){
         return this.user;
     }
     public void setUrl(String url){
@@ -87,3 +80,4 @@ class Data
         return this.__v;
     }
 }
+

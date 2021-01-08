@@ -2,6 +2,7 @@ package com.umernasirr.moosicapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,14 +38,23 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.myView
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        holder.txtSongName.setText(songsList.get(position).getName());
-        holder.txtSongCreator.setText(songsList.get(position).getUser_name());
+        holder.txtSongName.setText(songsList.get(position).getDescription());
+        holder.txtSongCreator.setText(songsList.get(position).getUser().getName());
 
-// Action listener on button to go to play screen
+        // Action listener on button to go to play screen
         holder.btnPlaySong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MusicPlayerActivity.class);
+
+                Bundle bundle = new Bundle();
+                //Add your data from method to bundle
+                bundle.putString("song_url", songsList.get(position).getUrl());
+                bundle.putString("song_name", songsList.get(position).getDescription());
+                bundle.putString("song_id", songsList.get(position).get_id());
+
+                //Add the bundle to the intent
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });
@@ -70,7 +80,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.myView
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
                 for( SongModel song: cpySongsList){
-                    if(song.getName().toLowerCase().contains(filterPattern) ){
+                    if(song.getDescription().toLowerCase().contains(filterPattern) ){
                         filteredList.add(song);
                     }
                 }
@@ -93,7 +103,6 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.myView
         TextView txtSongName;
         TextView txtSongCreator;
         ImageView btnPlaySong;
-
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);

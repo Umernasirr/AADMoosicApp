@@ -185,7 +185,7 @@
         />
 
     <ProgressBar
-        android:id="@+id/loader"
+        android:id="@+id/loaderMusic"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

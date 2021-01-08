@@ -1,60 +1,42 @@
 package com.umernasirr.moosicapp;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class SongsResponse
+class DataPR
 {
-    private boolean success;
+    private ArrayList<SongModel> song;
 
-    private List<Data> data;
-
-    public void setSuccess(boolean success){
-        this.success = success;
-    }
-    public boolean getSuccess(){
-        return this.success;
-    }
-    public void setData(List<Data> data){
-        this.data = data;
-    }
-    public List<Data> getData(){
-        return this.data;
-    }
-}
-
-
-class Data
-{
     private String _id;
+
+    private String name;
 
     private String description;
 
     private User user;
 
-    private String url;
-
     private String createdAt;
 
     private int __v;
 
+    public void setSong(ArrayList<SongModel> song){
+        this.song = song;
+    }
+    public ArrayList<SongModel> getSong(){
+        return this.song;
+    }
     public void set_id(String _id){
         this._id = _id;
     }
     public String get_id(){
         return this._id;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return this.name;
     }
     public void setDescription(String description){
         this.description = description;
@@ -68,12 +50,6 @@ class Data
     public User getUser(){
         return this.user;
     }
-    public void setUrl(String url){
-        this.url = url;
-    }
-    public String getUrl(){
-        return this.url;
-    }
     public void setCreatedAt(String createdAt){
         this.createdAt = createdAt;
     }
@@ -85,5 +61,25 @@ class Data
     }
     public int get__v(){
         return this.__v;
+    }
+}
+
+public class PlaylistResponse
+{
+    private boolean success;
+
+    private ArrayList<DataPR> data;
+
+    public void setSuccess(boolean success){
+        this.success = success;
+    }
+    public boolean getSuccess(){
+        return this.success;
+    }
+    public void setData(ArrayList<DataPR> data){
+        this.data = data;
+    }
+    public ArrayList<DataPR> getData(){
+        return this.data;
     }
 }

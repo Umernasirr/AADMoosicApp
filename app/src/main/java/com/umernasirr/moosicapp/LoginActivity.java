@@ -23,8 +23,6 @@ import retrofit2.Retrofit;
 public class LoginActivity extends AppCompatActivity {
 
     private ProgressBar spinner;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
 
         if(pref.getBoolean("isAuthenticated", false)){
                 //uncomment thi after the reg api is done
-//            Toast.makeText(getApplicationContext(),"Successfully logged in", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(), SongsListActivity.class));
         }
 
@@ -45,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         Retrofit retrofit = RetrofitFactory.getRetrofit();
         TextView error = (TextView)findViewById((R.id.txtError));
 
-        spinner = (ProgressBar)findViewById(R.id.loader);
+        spinner = (ProgressBar)findViewById(R.id.loaderMusic);
         spinner.setVisibility(View.GONE);
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
@@ -85,15 +82,13 @@ public class LoginActivity extends AppCompatActivity {
 
                             AuthResponse result = response.body();
 
-
-
                             if(String.valueOf(response.code()).equals("200")) {
                                 Toast.makeText(getApplicationContext(),"Successfully logged in", Toast.LENGTH_SHORT).show();
 
                                 editor.putString("token", result.getToken());
                                 editor.putBoolean("isAuthenticated",true);
                                 Gson gson = new Gson();
-                                String json =  gson.toJson(result.getUser());
+                                String json =  gson.toJson(result);
 //                                gson.toString()
                                 editor.putString("user", json);
                                 editor.commit();
@@ -107,11 +102,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             error.setText(message.getError());
 
-
                             }
-
-
-
                         }
 
                         @Override
@@ -126,10 +117,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 }
-
             }
         };
-
 
         btnRegister.setOnClickListener(onClickListenerRegister);
         btnLogin.setOnClickListener(onClickListenerLogin);
