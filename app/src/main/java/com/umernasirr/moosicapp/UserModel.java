@@ -10,13 +10,26 @@ public class UserModel {
         this.email = email;
         this.playlist = playlist;
     }
+    public  UserModel(String email, String password){
+        this.email = email;
+        this.password = password;
+    }
 
-    private int id;
+    public UserModel(String gender, String name, String email, String password){
+        this.gender = gender;
+        this.email = email;
+        this.name = name;
+        this.password = password;
+
+    }
+
+    private Integer id;
     private String username;
     private String password;
     private String gender;
     private String email;
     private String[] playlist;
+    private String name;
     
     public String[] getPlaylist() {
         return playlist;
@@ -26,6 +39,17 @@ public class UserModel {
         this.playlist = playlist;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;

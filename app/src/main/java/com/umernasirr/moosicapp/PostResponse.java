@@ -1,15 +1,35 @@
 package com.umernasirr.moosicapp;
+import java.util.ArrayList;
 
+public class PostResponse
+{
+    private boolean success;
 
-import java.io.Serializable;
+    private ArrayList<DataPost> data;
 
-public class SongModel implements Serializable {
+    public void setSuccess(boolean success){
+        this.success = success;
+    }
+    public boolean getSuccess(){
+        return this.success;
+    }
+    public void setData(ArrayList<DataPost> data){
+        this.data = data;
+    }
+    public ArrayList<DataPost> getData(){
+        return this.data;
+    }
+}
 
+class DataPost
+{
     private String _id;
+
+    private String title;
 
     private String description;
 
-    private User user;
+    private String user;
 
     private String url;
 
@@ -17,20 +37,17 @@ public class SongModel implements Serializable {
 
     private int __v;
 
-    public SongModel(String _id, String description, User user, String url, String createdAt, int __v) {
-        this._id = _id;
-        this.description = description;
-        this.user = user;
-        this.url = url;
-        this.createdAt = createdAt;
-        this.__v = __v;
-    }
-
     public void set_id(String _id){
         this._id = _id;
     }
     public String get_id(){
         return this._id;
+    }
+    public void setTitle(String title){
+        this.title = title;
+    }
+    public String getTitle(){
+        return this.title;
     }
     public void setDescription(String description){
         this.description = description;
@@ -38,10 +55,10 @@ public class SongModel implements Serializable {
     public String getDescription(){
         return this.description;
     }
-    public void setUser(User user){
+    public void setUser(String user){
         this.user = user;
     }
-    public User getUser(){
+    public String getUser(){
         return this.user;
     }
     public void setUrl(String url){
@@ -63,3 +80,4 @@ public class SongModel implements Serializable {
         return this.__v;
     }
 }
+

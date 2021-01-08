@@ -39,7 +39,7 @@
         android:layout_marginLeft="64dp"
         android:layout_marginEnd="64dp"
         android:layout_marginRight="64dp"
-        android:hint="Username"
+        android:hint="Email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -48,6 +48,7 @@
         app:layout_constraintVertical_bias="0.396"  >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtTxtUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -69,6 +70,7 @@
         app:layout_constraintVertical_bias="0.1">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtTxtPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -156,6 +158,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtFieldPass"
             app:layout_constraintVertical_bias="0.732" />
+
+        <TextView
+            android:id="@+id/txtError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#E91E1E"
+            app:layout_constraintBottom_toTopOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtFieldPass"
+            app:layout_constraintVertical_bias="0.243" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -168,6 +183,14 @@
         android:id="@+id/navView"
         android:layout_gravity="start"
         />
+
+    <ProgressBar
+        android:id="@+id/loaderMusic"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:rotationX="-7" />
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

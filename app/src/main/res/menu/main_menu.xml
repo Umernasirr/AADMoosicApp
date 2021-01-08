@@ -11,12 +11,18 @@
             <item
                 android:id="@+id/mitemUpload"
                 android:icon="@drawable/ic_baseline_add_circle_outline_24"
-                android:title="Upload Song" />
+                android:title="Upload Songs" />
 
             <item
                 android:id="@+id/mitemPlaylist"
                 android:icon="@drawable/ic_baseline_playlist_add_check_24"
-                android:title="View Your Playlist" />
+                android:title="View Playlist" />
+
+            <item
+                android:id="@+id/mitemPosts"
+                android:icon="@drawable/ic_directory"
+                android:title="View Posts" />
+
         </menu>
     </item>
 

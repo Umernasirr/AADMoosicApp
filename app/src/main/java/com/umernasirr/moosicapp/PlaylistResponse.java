@@ -1,36 +1,42 @@
 package com.umernasirr.moosicapp;
 
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SongModel implements Serializable {
+class DataPR
+{
+    private ArrayList<SongModel> song;
 
     private String _id;
+
+    private String name;
 
     private String description;
 
     private User user;
 
-    private String url;
-
     private String createdAt;
 
     private int __v;
 
-    public SongModel(String _id, String description, User user, String url, String createdAt, int __v) {
-        this._id = _id;
-        this.description = description;
-        this.user = user;
-        this.url = url;
-        this.createdAt = createdAt;
-        this.__v = __v;
+    public void setSong(ArrayList<SongModel> song){
+        this.song = song;
     }
-
+    public ArrayList<SongModel> getSong(){
+        return this.song;
+    }
     public void set_id(String _id){
         this._id = _id;
     }
     public String get_id(){
         return this._id;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return this.name;
     }
     public void setDescription(String description){
         this.description = description;
@@ -44,12 +50,6 @@ public class SongModel implements Serializable {
     public User getUser(){
         return this.user;
     }
-    public void setUrl(String url){
-        this.url = url;
-    }
-    public String getUrl(){
-        return this.url;
-    }
     public void setCreatedAt(String createdAt){
         this.createdAt = createdAt;
     }
@@ -61,5 +61,25 @@ public class SongModel implements Serializable {
     }
     public int get__v(){
         return this.__v;
+    }
+}
+
+public class PlaylistResponse
+{
+    private boolean success;
+
+    private ArrayList<DataPR> data;
+
+    public void setSuccess(boolean success){
+        this.success = success;
+    }
+    public boolean getSuccess(){
+        return this.success;
+    }
+    public void setData(ArrayList<DataPR> data){
+        this.data = data;
+    }
+    public ArrayList<DataPR> getData(){
+        return this.data;
     }
 }

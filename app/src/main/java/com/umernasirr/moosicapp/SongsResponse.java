@@ -1,10 +1,43 @@
 package com.umernasirr.moosicapp;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SongModel implements Serializable {
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class SongsResponse
+{
+    private boolean success;
+
+    private List<Data> data;
+
+    public void setSuccess(boolean success){
+        this.success = success;
+    }
+    public boolean getSuccess(){
+        return this.success;
+    }
+    public void setData(List<Data> data){
+        this.data = data;
+    }
+    public List<Data> getData(){
+        return this.data;
+    }
+}
+
+
+class Data
+{
     private String _id;
 
     private String description;
@@ -16,15 +49,6 @@ public class SongModel implements Serializable {
     private String createdAt;
 
     private int __v;
-
-    public SongModel(String _id, String description, User user, String url, String createdAt, int __v) {
-        this._id = _id;
-        this.description = description;
-        this.user = user;
-        this.url = url;
-        this.createdAt = createdAt;
-        this.__v = __v;
-    }
 
     public void set_id(String _id){
         this._id = _id;
