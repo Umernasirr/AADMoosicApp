@@ -82,15 +82,13 @@ public class LoginActivity extends AppCompatActivity {
 
                             AuthResponse result = response.body();
 
-
-
                             if(String.valueOf(response.code()).equals("200")) {
                                 Toast.makeText(getApplicationContext(),"Successfully logged in", Toast.LENGTH_SHORT).show();
 
                                 editor.putString("token", result.getToken());
                                 editor.putBoolean("isAuthenticated",true);
                                 Gson gson = new Gson();
-                                String json =  gson.toJson(result.getUser());
+                                String json =  gson.toJson(result);
 //                                gson.toString()
                                 editor.putString("user", json);
                                 editor.commit();
@@ -104,11 +102,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             error.setText(message.getError());
 
-
                             }
-
-
-
                         }
 
                         @Override
@@ -123,10 +117,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 }
-
             }
         };
-
 
         btnRegister.setOnClickListener(onClickListenerRegister);
         btnLogin.setOnClickListener(onClickListenerLogin);

@@ -114,7 +114,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/bt_AddPlaylist"
+            android:id="@+id/btnAddPlaylist"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:contentDescription="AddPlaylist"

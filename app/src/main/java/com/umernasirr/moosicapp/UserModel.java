@@ -29,7 +29,7 @@ public class UserModel {
     private String gender;
     private String email;
     private String[] playlist;
-    private  String name;
+    private String name;
     
     public String[] getPlaylist() {
         return playlist;

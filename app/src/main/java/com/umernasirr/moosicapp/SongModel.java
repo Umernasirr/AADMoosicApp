@@ -1,58 +1,65 @@
 package com.umernasirr.moosicapp;
 
-public class SongModel {
-    int id;
-    String name;
-    String url;
-    int user_id;
-    String user_name;
-    public SongModel(int id, String name, String url, int user_id, String user_name) {
-        this.id = id;
-        this.name = name;
+
+import java.io.Serializable;
+
+public class SongModel implements Serializable {
+
+    private String _id;
+
+    private String description;
+
+    private User user;
+
+    private String url;
+
+    private String createdAt;
+
+    private int __v;
+
+    public SongModel(String _id, String description, User user, String url, String createdAt, int __v) {
+        this._id = _id;
+        this.description = description;
+        this.user = user;
         this.url = url;
-        this.user_id = user_id;
-        this.user_name = user_name;
-
-
-
+        this.createdAt = createdAt;
+        this.__v = __v;
     }
 
-    public int getId() {
-        return id;
+    public void set_id(String _id){
+        this._id = _id;
     }
-
-    public void setId(int id) {
-        this.id = id;
+    public String get_id(){
+        return this._id;
     }
-
-    public String getName() {
-        return name;
+    public void setDescription(String description){
+        this.description = description;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public String getDescription(){
+        return this.description;
     }
-
-    public String getUrl() {
-        return url;
+    public void setUser(User user){
+        this.user = user;
     }
-
-    public void setUrl(String url) {
+    public User getUser(){
+        return this.user;
+    }
+    public void setUrl(String url){
         this.url = url;
     }
-
-    public int getUser_id() {
-        return user_id;
+    public String getUrl(){
+        return this.url;
     }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setCreatedAt(String createdAt){
+        this.createdAt = createdAt;
     }
-
-    public void setUser_name(String user_name){ this.user_name = user_name;}
-
-    public String getUser_name(){
-        return user_name;
+    public String getCreatedAt(){
+        return this.createdAt;
     }
-
+    public void set__v(int __v){
+        this.__v = __v;
+    }
+    public int get__v(){
+        return this.__v;
+    }
 }

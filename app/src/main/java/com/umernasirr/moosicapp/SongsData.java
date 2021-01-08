@@ -7,7 +7,6 @@ public class SongsData {
 
     public ArrayList<SongModel> songsList;
 
-
     public SongsData() {
         songsList = new ArrayList<>();
 
