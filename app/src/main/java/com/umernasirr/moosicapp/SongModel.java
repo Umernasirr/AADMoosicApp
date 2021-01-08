@@ -6,6 +6,17 @@ public class SongModel {
     String url;
     int user_id;
     String user_name;
+
+    private String title;
+    private String Artist;
+    private int image;
+
+    public SongModel(String title, String artist, int image) {
+        this.title = title;
+        Artist = artist;
+        this.image = image;
+    }
+
     public SongModel(int id, String name, String url, int user_id, String user_name) {
         this.id = id;
         this.name = name;
@@ -15,6 +26,30 @@ public class SongModel {
 
 
 
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getArtist() {
+        return Artist;
+    }
+
+    public void setArtist(String artist) {
+        Artist = artist;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 
     public int getId() {
