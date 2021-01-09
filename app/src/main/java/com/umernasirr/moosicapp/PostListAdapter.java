@@ -40,23 +40,26 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.myView
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         holder.txtTitle.setText(postList.get(position).getTitle());
         holder.txtDescription.setText(postList.get(position).getDescription());
+        holder.txtURL.setText(postList.get(position).getUrl());
 
-        // Action listener on button to go to play screen
-//        holder.btnPlaySong.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, MusicPlayerActivity.class);
-//
-//                Bundle bundle = new Bundle();
-//                //Add your data from method to bundle
-//                bundle.putString("song_url", postList.get(position).getUrl());
-//                bundle.putString("song_name", postList.get(position).getName());
-//
-//                //Add the bundle to the intent
-//                intent.putExtras(bundle);
-//                context.startActivity(intent);
-//            }
-//        });
+//         Action listener on button to go to play screen
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle bundle = new Bundle();
+                //Add your data from method to bundle
+                bundle.putString("title", postList.get(position).getTitle());
+                bundle.putString("description", postList.get(position).getDescription());
+                bundle.putString("url", postList.get(position).getUrl());
+                bundle.putString("createdAt", postList.get(position).getCreatedAt());
+
+                Intent intent = new Intent(context, PostViewActivity.class);
+                //Add the bundle to the intent
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -100,12 +103,13 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.myView
     public static class myViewHolder extends RecyclerView.ViewHolder{
         TextView txtTitle;
         TextView txtDescription;
-
+        TextView txtURL;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
 
             txtTitle = itemView.findViewById(R.id.txtTitle);
             txtDescription = itemView.findViewById(R.id.txtDescription);
+            txtURL = itemView.findViewById(R.id.txtURL);
         }
     }
 }

@@ -174,12 +174,7 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
 
     }
 
-
-
-
-
-
-
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent;
         switch (item.getItemId()){
@@ -193,10 +188,6 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
                 startActivity(intent);
                 break;
 
-            case R.id.mitemForgot:
-//                intent = new Intent(this, CreateSongActivity.class);
-//                startActivity(intent);
-                break;
 
         }
         return true;
@@ -206,7 +197,6 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
-//    btn.setOnClickListener(onClickListenerRegister);
 
 
 }

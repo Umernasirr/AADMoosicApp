@@ -123,9 +123,49 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         });
     }
 
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected (@NonNull MenuItem item){
         Intent intent;
+        switch (item.getItemId()) {
+            case R.id.mitemProfile:
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                break;
 
+            case R.id.mitemListings:
+                intent = new Intent(this, SongsListActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.mitemUpload:
+                intent = new Intent(this, CreateSongActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.mitemPlaylist:
+                intent = new Intent(this, PlaylistListActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.mitemPosts:
+                intent = new Intent(this, PostListActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.mitemLogout:
+
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
+
+                editor.putString("token", "");
+                editor.putBoolean("isAuthenticated",false);
+                editor.putString("user", "");
+                editor.commit();
+                intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+
+                break;
+
+        }
         return true;
     }
 

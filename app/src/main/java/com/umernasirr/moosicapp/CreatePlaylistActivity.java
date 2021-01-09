@@ -57,15 +57,7 @@ public class CreatePlaylistActivity extends AppCompatActivity {
 
                 if (!playlistName.equals("")) {
 
-
                     PlaylistModel playlistModel = new PlaylistModel(playlistName, "5fda76c5f866c90bf03054bf");
-
-
-
-                    Log.d("myTag", playlistModel.getId()+ "");
-                    Log.d("myTag", playlistModel.getUser() +" ");
-                    Log.d("myTag", playlistModel.getName()+ "");
-
 
                     Call<PlaylistResponse> call = apiInterface.addPlaylist(playlistModel);
 
@@ -89,14 +81,7 @@ public class CreatePlaylistActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<PlaylistResponse> call, Throwable t) {
-
-
                             spinner.setVisibility(View.GONE);
-
-//                        AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
-//                        builder1.setMessage("Write your message hedadassdasre.");
-//                            Log.d("Login", "dasdasdasdasdadsdss");
-//                            t.printStackTrace();
                             error.setText("Please check your internet connection");
                         }
                     });

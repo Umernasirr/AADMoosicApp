@@ -52,7 +52,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.myView
                 bundle.putString("song_url", songsList.get(position).getUrl());
                 bundle.putString("song_name", songsList.get(position).getDescription());
                 bundle.putString("song_id", songsList.get(position).get_id());
-
+                bundle .putString("user_name", songsList.get(position).getUser().getName());
                 //Add the bundle to the intent
                 intent.putExtras(bundle);
                 context.startActivity(intent);

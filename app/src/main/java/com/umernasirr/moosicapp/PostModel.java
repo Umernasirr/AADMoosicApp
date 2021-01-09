@@ -8,14 +8,36 @@ public class PostModel {
     String url;
     String user_name;
     String user_id;
+    String createdAt;
 
-    public PostModel(String id, String title, String description, String url, String user_name, String user_id) {
+
+    public PostModel(String id, String title, String description, String url, String user_name, String user_id, String createdAt) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.url = url;
         this.user_name = user_name;
         this.user_id = user_id;
+        this.createdAt = createdAt;
+    }
+
+
+    public PostModel(String title, String description, String user_id, String url ) {
+        this.title = title;
+        this.description = description;
+        this.url = url;
+        this.user_id = user_id;
+    }
+
+
+
+
+    public String getCreatedAt(){
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt){
+        this.createdAt = createdAt;
     }
 
 

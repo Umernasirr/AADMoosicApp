@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -20,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
     private ProgressBar spinner;
     @Override
@@ -40,12 +43,14 @@ public class LoginActivity extends AppCompatActivity {
         EditText email = (EditText) findViewById(R.id.edtTxtUser);
         EditText password = (EditText) findViewById(R.id.edtTxtPass);
         Retrofit retrofit = RetrofitFactory.getRetrofit();
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+
+
         TextView error = (TextView)findViewById((R.id.txtError));
 
         spinner = (ProgressBar)findViewById(R.id.loaderMusic);
         spinner.setVisibility(View.GONE);
 
-        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
 
 
@@ -125,6 +130,27 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()){
+            case R.id.mitemLogin:
+                intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.mitemSignup:
+                intent = new Intent(this, RegisterActivity.class);
+                startActivity(intent);
+                break;
 
 
+        }
+        return true;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }

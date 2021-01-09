@@ -2,10 +2,13 @@ package com.umernasirr.moosicapp;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -38,6 +41,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     String song_url;
     String song_name;
     String song_id;
+    String user_name;
     MediaPlayer mediaPlayer;
     Handler handler = new Handler();
     Runnable runnable;
@@ -46,6 +50,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     Button btnback;
     ImageView btnAddPlaylist;
     PlaylistData playListData;
+    NotificationManager notificationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +58,14 @@ public class MusicPlayerActivity extends AppCompatActivity {
         setContentView(R.layout.musicplayer);
         Bundle bundle = getIntent().getExtras();
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            createChannel();
+        }
+
         song_url = bundle.getString("song_url");
         song_name = bundle.getString("song_name");
         song_id = bundle.getString("song_id");
-
+        user_name = bundle.getString("user_name");
         playerPosition = findViewById(R.id.player_position);
         playerDuration = findViewById(R.id.player_duration);
         seekBar = findViewById(R.id.seek_bar);
@@ -185,6 +194,9 @@ public class MusicPlayerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 btPlay.setVisibility(View.GONE);
 
+
+                CreateNotification.createNotification(MusicPlayerActivity.this, song_name, user_name , R.drawable.ic_baseline_pause_circle_filled_24, 1);
+
                 btPause.setVisibility((View.VISIBLE));
 
                 mediaPlayer.start();
@@ -201,6 +213,10 @@ public class MusicPlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 btPause.setVisibility(View.GONE);
+
+
+                notificationManager.cancelAll();
+
 
                 btPlay.setVisibility(View.VISIBLE);
 
@@ -303,6 +319,19 @@ public class MusicPlayerActivity extends AppCompatActivity {
     }
 
 
+
+    private void createChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel(CreateNotification.CHANNEL_ID, "Asbahhhh", NotificationManager.IMPORTANCE_LOW);
+
+             notificationManager = getSystemService(NotificationManager.class);
+            if(notificationManager != null){
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+    }
+
+
     public void addSongToPlaylist(int position) {
         String playList_id = playListData.playlistList.get(position).getId();
 
@@ -312,8 +341,6 @@ public class MusicPlayerActivity extends AppCompatActivity {
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
 
-        Log.d("myTag", songAddToPlaylist.get_id() + "");
-        Log.d("myTag", songAddToPlaylist.getSong() + "");
 
         Call<SongAddToPlaylist> call = apiInterface.songAddToPlaylist(songAddToPlaylist);
 

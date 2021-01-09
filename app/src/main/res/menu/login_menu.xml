@@ -15,11 +15,6 @@
                 android:icon="@drawable/ic_baseline_add_circle_outline_24"
                 android:title="Signup"
                 />
-            <item
-                android:id="@+id/mitemForgot"
-                android:icon="@drawable/ic_baseline_vpn_key_24"
-                android:title="Forget Password"
-                />
 
         </menu>
     </item>

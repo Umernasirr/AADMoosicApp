@@ -1,6 +1,7 @@
 package com.umernasirr.moosicapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -196,6 +197,21 @@ public class SongsListActivity extends AppCompatActivity implements NavigationVi
                 intent = new Intent(this, PostListActivity.class);
                 startActivity(intent);
                 break;
+
+            case R.id.mitemLogout:
+
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
+
+                editor.putString("token", "");
+                editor.putBoolean("isAuthenticated",false);
+                editor.putString("user", "");
+                editor.commit();
+                intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+
+                break;
+
         }
         return true;
     }
