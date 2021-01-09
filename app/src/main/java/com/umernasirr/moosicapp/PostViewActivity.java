@@ -28,8 +28,6 @@ public class PostViewActivity extends AppCompatActivity  implements NavigationVi
         setContentView(R.layout.activity_postview);
 
 
-
-
         Toolbar toolbar = findViewById(R.id.postViewToolbar);
         setSupportActionBar(toolbar);
 

@@ -40,7 +40,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.myView
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         holder.txtTitle.setText(postList.get(position).getTitle());
         holder.txtDescription.setText(postList.get(position).getDescription());
-        holder.txtURL.setText(postList.get(position).getUrl());
+        holder.txtURL.setText(postList.get(position).getCreatedAt().toString().substring(0,10));
 
 //         Action listener on button to go to play screen
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +53,6 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.myView
                 bundle.putString("description", postList.get(position).getDescription());
                 bundle.putString("url", postList.get(position).getUrl());
                 bundle.putString("createdAt", postList.get(position).getCreatedAt());
-
                 Intent intent = new Intent(context, PostViewActivity.class);
                 //Add the bundle to the intent
                 intent.putExtras(bundle);

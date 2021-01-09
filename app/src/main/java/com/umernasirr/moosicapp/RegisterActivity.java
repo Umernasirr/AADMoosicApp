@@ -136,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
                                 editor.putString("user", json);
                                 editor.commit();
 
-                                startActivity(new Intent(getApplicationContext(), SongsListActivity.class));
+                                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 
 
                             }
@@ -144,12 +144,7 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
                                 AuthResponse message =    new Gson().fromJson(response.errorBody().charStream(), AuthResponse.class);
 
                                 error.setText(message.getError());
-
-
                             }
-
-
-
                         }
 
                         @Override
